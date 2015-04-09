@@ -1,9 +1,9 @@
 {
-  "name": "reactor",
-  "version": "0.0.0",
+  "name": "yy_demo",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "grunt"
+    "start": "NODE_ENV=production node bin/www"
   },
   "dependencies": {
     "axios": "^0.5.2",
