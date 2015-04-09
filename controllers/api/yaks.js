@@ -22,9 +22,9 @@ function fetchYaks(req, res) {
     validHost = PRODUCTION;
   }
 
-  if (!req.header('host').match(validHost)) {
-    return res.status(401).json('Unauthorized application');
-  }
+  // if (!req.header('host').match(validHost)) {
+  //   return res.status(401).json('Unauthorized application');
+  // }
 
   var
     lat = req.query.lat || YY_HQ_LAT,
