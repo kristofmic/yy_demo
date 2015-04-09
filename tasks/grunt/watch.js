@@ -12,7 +12,7 @@ module.exports = {
     ],
     tasks: ['sass:dev'],
     options: {
-      livereload: true
+      // livereload: true
     }
   },
 };

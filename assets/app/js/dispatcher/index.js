@@ -1,6 +1,6 @@
 var
   { Dispatcher } = require('flux'),
-  { VIEW_ACTION, SERVER_ACTION } = require('../constants'),
+  { VIEW_SOURCE, SERVER_SOURCE } = require('../constants'),
   assign = require('lodash/object/assign'),
   appDispatcher = new Dispatcher();
 
@@ -13,14 +13,14 @@ module.exports = appDispatcher;
 
 function handleServerAction (action) {
   this.dispatch({
-    source: SERVER_ACTION,
+    source: SERVER_SOURCE,
     action: action || {}
   });
 }
 
 function handleViewAction (action) {
   this.dispatch({
-    source: VIEW_ACTION,
+    source: VIEW_SOURCE,
     action: action || {}
   });
 }

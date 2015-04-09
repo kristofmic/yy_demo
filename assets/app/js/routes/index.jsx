@@ -1,15 +1,14 @@
 var
   React = require('react'),
   { Route, DefaultRoute, Redirect } = require('react-router'),
-  App = require('../components/app_template'),
+  { Container, Feed } = require('../components'),
   routes;
 
 routes = (
-  <Route name="app" path="/" handler={App}>
-    <Route name="t1" handler={App.T1} />
-    <Route name="t2" handler={App.T2} />
-    <DefaultRoute handler={App.T1} />
-    <Redirect from="*" to="t1" />
+  <Route name="container" path="/" handler={Container}>
+    <Route name="feed" handler={Feed} />
+    <DefaultRoute handler={Feed} />
+    <Redirect from="*" to="feed" />
   </Route>
 );
 

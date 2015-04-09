@@ -1,11 +1,11 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,700);
-@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600);
+@import url(http://fonts.googleapis.com/css?family=Lato);
 body {
-  font-family: 'Roboto', HelveticaNeue, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: 'OpenSans', HelveticaNeue, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.428571429;
-  color: rgba(0, 0, 0, 0.87);
+  color: #637370;
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: antialiased !important;
 }
@@ -15,11 +15,11 @@ body button, body input, body select, body textarea, body .form-control {
 }
 
 h1, h2, h3 {
-  font-family: 'Roboto Slab', HelveticaNeue, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: 'Lato', HelveticaNeue, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
 }
 
 h4, h5, h6 {
-  font-family: 'Roboto Slab', HelveticaNeue, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: 'Lato', HelveticaNeue, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   line-height: 20px;
 }
 
@@ -28,11 +28,11 @@ h4, h5, h6 {
 }
 
 .text-primary {
-  color: #E91E63 !important;
+  color: #ac95c7 !important;
 }
 
 .text-success {
-  color: #3F51B5 !important;
+  color: #57e2ca !important;
 }
 
 .text-muted {
@@ -50,20 +50,39 @@ i, .fa {
   vertical-align: initial;
 }
 
-html body {
-  background-color: #FAFAFA;
-  position: relative;
+.social-icon {
+  color: #FFF;
+  font-size: 24px;
+  margin: 0 12px;
+  -webkit-transition: color .15s linear;
+  -moz-transition: color .15s linear;
+  transition: color .15s linear;
 }
-html body .container {
-  padding: 15px;
+.social-icon:last-child {
+  margin-right: 0;
+}
+.social-icon .fa-twitter:hover {
+  color: #00aced;
+}
+.social-icon .fa-facebook-official:hover {
+  color: #3b5998;
+}
+.social-icon .fa-instagram:hover {
+  color: #675144;
 }
 
-.nav-tabs li a.active {
-  color: #555;
-  cursor: default;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-bottom-color: transparent;
+html body {
+  background-color: #f4f6f5;
+  position: relative;
+}
+
+.separator {
+  height: 1px;
+  background-color: #e9eceb;
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  bottom: 0;
 }
 
 /*# sourceMappingURL=app.css.map */

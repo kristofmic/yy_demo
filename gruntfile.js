@@ -43,7 +43,8 @@ function gruntConfig(grunt) {
     'browserify:bundle',
     'uglify',
     'filerev',
-    'userev'
+    'userev',
+    'imagemin'
   ]);
   grunt.registerTask('build:watch', [
     'build:dist',

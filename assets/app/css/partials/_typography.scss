@@ -1,12 +1,12 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,700);
-@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600);
+@import url(http://fonts.googleapis.com/css?family=Lato);
 
 @mixin primary-heading-font {
-  font-family: 'Roboto Slab', HelveticaNeue, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: 'Lato', HelveticaNeue, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
 }
 
 @mixin body-font {
-  font-family: 'Roboto', HelveticaNeue, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: 'OpenSans', HelveticaNeue, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
 }
 
 body {
@@ -14,7 +14,7 @@ body {
   font-weight:  400;
   font-size: 14px;
   line-height: 1.428571429;
-  color: $black87;
+  color: $gray;
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: antialiased !important;
 
@@ -58,4 +58,29 @@ i, .fa {
   text-shadow: none;
   text-align: center;
   vertical-align: initial;
+}
+
+.social-icon {
+  color: $white;
+  font-size: 24px;
+  margin: 0 12px;
+  -webkit-transition: color .15s linear;
+  -moz-transition: color .15s linear;
+  transition: color .15s linear;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  .fa-twitter:hover {
+    color: #00aced;
+  }
+
+  .fa-facebook-official:hover {
+    color: #3b5998;
+  }
+
+  .fa-instagram:hover {
+    color: #675144;
+  }
 }
