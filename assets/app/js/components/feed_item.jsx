@@ -23,6 +23,7 @@ styles = {
     backgroundColor: '#57e2ca',
     padding: '2px 12px',
     marginTop: '-5px',
+    marginLeft: '5px',
     borderRadius: '4px'
   },
   timestamp: {
