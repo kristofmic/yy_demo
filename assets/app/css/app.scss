@@ -1,0 +1,17 @@
+@import './partials/_colors';
+@import './partials/_typography';
+@import './partials/_body';
+
+.nav-tabs {
+  li {
+    a {
+      &.active {
+        color: #555;
+        cursor: default;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-bottom-color: transparent;
+      }
+    }
+  }
+}

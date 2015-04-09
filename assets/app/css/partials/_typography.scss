@@ -1,0 +1,61 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,700);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300);
+
+@mixin primary-heading-font {
+  font-family: 'Roboto Slab', HelveticaNeue, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+}
+
+@mixin body-font {
+  font-family: 'Roboto', HelveticaNeue, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+}
+
+body {
+  @include body-font;
+  font-weight:  400;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: $black87;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+
+  button, input, select, textarea, .form-control {
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+  }
+}
+
+h1, h2, h3 {
+  @include primary-heading-font;
+}
+
+h4, h5, h6 {
+  @include primary-heading-font;
+  line-height: 20px;
+}
+
+.text-danger {
+  color: $danger !important;
+}
+
+.text-primary {
+  color: $accent !important;
+}
+
+.text-success {
+  color: $primary !important;
+}
+
+.text-muted {
+  color: $black54 !important;
+}
+
+.text-shadow {
+  text-shadow: 0 1px 1px $black26;
+}
+
+i, .fa {
+  min-width: 18px;
+  text-shadow: none;
+  text-align: center;
+  vertical-align: initial;
+}

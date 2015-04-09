@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <% if (process.env.NODE_ENV === 'production') { %>
+      <link rel="stylesheet" href="css/app.min.35fc9897.css">
+    <% } else { %>
+      <link rel="stylesheet" href="css/app.css">
+    <% } %>
+
+  </head>
+  <body>

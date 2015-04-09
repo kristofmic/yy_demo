@@ -1,0 +1,69 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,700);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300);
+body {
+  font-family: 'Roboto', HelveticaNeue, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: rgba(0, 0, 0, 0.87);
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+body button, body input, body select, body textarea, body .form-control {
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+h1, h2, h3 {
+  font-family: 'Roboto Slab', HelveticaNeue, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+}
+
+h4, h5, h6 {
+  font-family: 'Roboto Slab', HelveticaNeue, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  line-height: 20px;
+}
+
+.text-danger {
+  color: #F44336 !important;
+}
+
+.text-primary {
+  color: #E91E63 !important;
+}
+
+.text-success {
+  color: #3F51B5 !important;
+}
+
+.text-muted {
+  color: rgba(0, 0, 0, 0.54) !important;
+}
+
+.text-shadow {
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.26);
+}
+
+i, .fa {
+  min-width: 18px;
+  text-shadow: none;
+  text-align: center;
+  vertical-align: initial;
+}
+
+html body {
+  background-color: #FAFAFA;
+  position: relative;
+}
+html body .container {
+  padding: 15px;
+}
+
+.nav-tabs li a.active {
+  color: #555;
+  cursor: default;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+}
+
+/*# sourceMappingURL=app.css.map */
