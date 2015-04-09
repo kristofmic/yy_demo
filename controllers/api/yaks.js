@@ -8,7 +8,7 @@ var
   YY_API = 'https://us-central-api.yikyakapi.net/api/getMessages?userID=-&lat%s=&long%s=&userLat=%s&userLong=%s&version=2.4.1&horizontalAccuracy=65.000000&verticalAccuracy=10.000000&altitude=0&floorLevel=0&speed=0&course=0',
   YY_HQ_LAT = '33.849120',
   YY_HQ_LONG = '-84.373375',
-  PRODUCTION = 'http://elb-demoapps-1068152694.us-west-2.elb.amazonaws',
+  PRODUCTION = 'elb-demoapps-1068152694.us-west-2.elb.amazonaws',
   LOCALHOST = 'localhost';
 
 router.get('/yaks', fetchYaks);
