@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - "0.10"
+env:
+- NODE_ENV=test
+before_install:
+ - openssl aes-256-cbc -K $encrypted_56ed7ab360a7_key -iv $encrypted_56ed7ab360a7_iv -in ./tasks/travis/aws.pem.enc -out ./tasks/travis/aws.pem -d
+after_success:
+  - "./tasks/travis/deployment.sh"
