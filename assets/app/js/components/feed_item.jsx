@@ -52,35 +52,36 @@ FeedItem = React.createClass({
 
   render: function() {
     var
-      replies = 'replies',
-      thumbnail,
-      comments;
+      message = this.props.message,
+      repliesText = 'replies',
+      thumbnailEl,
+      commentsEl;
 
-    if (this.props.message.thumbNailUrl) {
-      thumbnail = (<img style={styles.thumbnail} src={this.props.message.thumbNailUrl} />);
+    if (message.thumbNailUrl) {
+      thumbnailEl = (<img style={styles.thumbnail} src={message.thumbNailUrl} />);
     }
 
-    if (this.props.message.comments) {
-      if (this.props.message.comments === 1) replies = 'reply';
+    if (message.comments) {
+      if (message.comments === 1) repliesText = 'reply';
 
-      comments = (
+      commentsEl = (
         <div style={styles.replies}>
           <i className="fa fa-comments" style={styles.icon}></i>
-          {`${this.props.message.comments} ${replies}`}
+          {`${message.comments} ${repliesText}`}
         </div>
       );
     }
 
     return (
       <li style={styles.listItem}>
-        <div className="likes">{this.props.message.numberOfLikes}</div>
-        <p style={styles.message}>{this.props.message.message}</p>
-        {thumbnail}
+        <div className="likes">{message.numberOfLikes}</div>
+        <p style={styles.message}>{message.message}</p>
+        {thumbnailEl}
         <div style={styles.timestamp}>
           <i className="fa fa-clock-o" style={styles.icon}></i>
-          <MomentFromNow time={this.props.message.time} />
+          <MomentFromNow time={message.time} />
         </div>
-        {comments}
+        {commentsEl}
         <div className="separator"></div>
       </li>
     );

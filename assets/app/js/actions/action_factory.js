@@ -1,7 +1,7 @@
 var
   dispatcher = require('../dispatcher'),
   { FETCH_YAKS, FETCH_YAKS_ERROR, LOAD_NEW_YAKS } = require('../constants'),
-  ajax = require('axios'),
+  yaksApi = require('../utils/api/yaks_api'),
   actionFactoryTemplate;
 
 actionFactoryTemplate = {
@@ -12,25 +12,7 @@ actionFactoryTemplate = {
 module.exports = actionFactoryTemplate;
 
 function fetchYaks(coords) {
-  var
-    req,
-    query = '';
-
-  coords = coords || {};
-  if (coords.lat && coords.long) {
-    query += `?lat=${coords.lat}&long=${coords.long}`;
-  }
-
-  req = {
-    url: `/api/yaks${query}`,
-    method: 'get',
-    responseType: 'json'
-  };
-
-  ajax(req)
-    .then((res) => {
-      if (res.status === 200) return res.data;
-    })
+  yaksApi.fetch(coords)
     .then((data) => {
       dispatchServerAction(FETCH_YAKS, data);
     })
