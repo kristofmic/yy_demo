@@ -186,7 +186,7 @@ Feed = React.createClass({ displayName: "Feed",
       messageItems = React.createElement("li", { style: { position: "relative" } }, React.createElement("p", { style: styles.loading }, React.createElement("img", { src: "img/yak.png", style: styles.loadingImg, className: "fa-spin" }), "Loading Yaks..."));
     }
 
-    return React.createElement("div", { className: "row" }, React.createElement("div", { className: "col-xs-12" }, React.createElement("ul", { className: "list-unstyled" }, messageItems)));
+    return React.createElement("div", { className: "row" }, React.createElement("div", { className: "col-xs-12" }, React.createElement("ul", { className: "list-unstyled yaks" }, messageItems)));
   }
 });
 
@@ -228,12 +228,6 @@ styles = {
     color: "rgba(99, 115, 112, .6)",
     fontWeight: "600"
   },
-  thumbnail: {
-    height: "300px",
-    border: "4px solid #fff",
-    boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
-    margin: "10px 0"
-  },
   icon: {
     marginRight: "5px"
   }
@@ -257,7 +251,7 @@ FeedItem = React.createClass({ displayName: "FeedItem",
         commentsEl;
 
     if (message.thumbNailUrl) {
-      thumbnailEl = React.createElement("img", { style: styles.thumbnail, src: message.thumbNailUrl });
+      thumbnailEl = React.createElement("img", { className: "thumbnail", src: message.thumbNailUrl });
     }
 
     if (message.comments) {
@@ -285,15 +279,11 @@ styles = {
     backgroundColor: "#57e2ca",
     padding: "30px",
     color: "#FFF"
-  },
-  logo: {
-    height: "48px"
-  }
-};
+  } };
 
 Header = React.createClass({ displayName: "Header",
   render: function render() {
-    return React.createElement("div", { style: styles.header }, React.createElement("div", { className: "container" }, React.createElement("div", { style: { float: "right" } }, React.createElement("a", { href: "https://twitter.com/YikYakApp", className: "social-icon" }, React.createElement("i", { className: "fa fa-twitter" })), React.createElement("a", { href: "https://www.facebook.com/yikyakapp", className: "social-icon" }, React.createElement("i", { className: "fa fa-facebook-official" })), React.createElement("a", { href: "http://instagram.com/yikyakapp", className: "social-icon" }, React.createElement("i", { className: "fa fa-instagram" }))), React.createElement("a", { href: "http://yikyakapp.com" }, React.createElement("img", { style: styles.logo, src: "http://www.yikyakapp.com/wp-content/themes/yik-yak-web-general/img/global/logotype-white-01.svg" })), React.createElement("h3", { style: { marginBottom: 0 } }, "Heres the converation happening around you...")));
+    return React.createElement("div", { style: styles.header }, React.createElement("div", { className: "container" }, React.createElement("div", { style: { float: "right" } }, React.createElement("a", { href: "https://twitter.com/YikYakApp", className: "social-icon" }, React.createElement("i", { className: "fa fa-twitter" })), React.createElement("a", { href: "https://www.facebook.com/yikyakapp", className: "social-icon" }, React.createElement("i", { className: "fa fa-facebook-official" })), React.createElement("a", { href: "http://instagram.com/yikyakapp", className: "social-icon" }, React.createElement("i", { className: "fa fa-instagram" }))), React.createElement("a", { href: "http://yikyakapp.com" }, React.createElement("img", { className: "logo", src: "http://www.yikyakapp.com/wp-content/themes/yik-yak-web-general/img/global/logotype-white-01.svg" })), React.createElement("h3", { style: { marginBottom: 0 } }, "Heres the converation happening around you...")));
   }
 });
 

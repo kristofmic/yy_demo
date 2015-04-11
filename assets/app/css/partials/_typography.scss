@@ -83,4 +83,9 @@ i, .fa {
   .fa-instagram:hover {
     color: #675144;
   }
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+    margin: 0 9px;
+  }
 }

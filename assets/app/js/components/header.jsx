@@ -10,9 +10,6 @@ styles = {
     padding: '30px',
     color: '#FFF'
   },
-  logo: {
-    height: '48px'
-  }
 };
 
 Header = React.createClass({
@@ -26,7 +23,7 @@ Header = React.createClass({
             <a href="http://instagram.com/yikyakapp" className="social-icon"><i className="fa fa-instagram"></i></a>
           </div>
           <a href="http://yikyakapp.com">
-            <img style={styles.logo} src="http://www.yikyakapp.com/wp-content/themes/yik-yak-web-general/img/global/logotype-white-01.svg" />
+            <img className="logo" src="http://www.yikyakapp.com/wp-content/themes/yik-yak-web-general/img/global/logotype-white-01.svg" />
           </a>
           <h3 style={{marginBottom: 0}}>Heres the converation happening around you...</h3>
         </div>

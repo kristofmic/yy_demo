@@ -112,7 +112,7 @@ Feed = React.createClass({
     return (
       <div className="row">
         <div className="col-xs-12">
-          <ul className="list-unstyled">
+          <ul className="list-unstyled yaks">
             {messageItems}
           </ul>
         </div>
