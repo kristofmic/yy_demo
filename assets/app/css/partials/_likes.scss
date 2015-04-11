@@ -1,0 +1,15 @@
+.likes {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  color: $white;
+  background-color: $primary;
+  padding: 2px 12px;
+  margin-left: 10px;
+  border-radius: 4px;
+
+  @media(max-width: 768px) {
+    padding: 2px 10px;
+    font-size: 20px;
+  }
+}
