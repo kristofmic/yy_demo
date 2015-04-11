@@ -27,14 +27,12 @@ actionHandlers = {
         });
 
         if (index > 0) {
-          state.newMessages = data.messages.slice(0, index);
-          this.emitChange();
+          state.newMessages = data.messages.splice(0, index);
         }
       }
-      else {
-        state.messages = data.messages;
-        this.emitChange();
-      }
+
+      state.messages = data.messages;
+      this.emitChange();
     }
   },
 

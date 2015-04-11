@@ -88,7 +88,7 @@ Feed = React.createClass({
     if (messages.length) {
       messageItems = messages.map((message) => {
         return (
-          <FeedItem key={message.messageId} message={message} />
+          <FeedItem key={message.messageID} message={message} />
         );
       });
 

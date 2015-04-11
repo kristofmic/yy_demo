@@ -15,22 +15,27 @@ styles = {
     margin: 0,
     fontSize: '18px'
   },
-  likes: {
-    float: 'right',
-    fontSize: '28px',
-    fontWeight: 'bold',
-    color: '#fff',
-    backgroundColor: '#57e2ca',
-    padding: '2px 12px',
-    marginTop: '-5px',
-    marginLeft: '5px',
-    borderRadius: '4px'
-  },
   timestamp: {
     color: 'rgba(99, 115, 112, .6)',
     position: 'absolute',
     bottom: '5px',
     left: '28px'
+  },
+  replies: {
+    position: 'absolute',
+    bottom: '5px',
+    right: '30px',
+    color: 'rgba(99, 115, 112, .6)',
+    fontWeight: '600'
+  },
+  thumbnail: {
+    height: '300px',
+    border: '4px solid #fff',
+    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)',
+    margin: '10px 0'
+  },
+  icon: {
+    marginRight: '5px'
   }
 };
 
@@ -46,14 +51,36 @@ FeedItem = React.createClass({
   },
 
   render: function() {
+    var
+      replies = 'replies',
+      thumbnail,
+      comments;
+
+    if (this.props.message.thumbNailUrl) {
+      thumbnail = (<img style={styles.thumbnail} src={this.props.message.thumbNailUrl} />);
+    }
+
+    if (this.props.message.comments) {
+      if (this.props.message.comments === 1) replies = 'reply';
+
+      comments = (
+        <div style={styles.replies}>
+          <i className="fa fa-comments" style={styles.icon}></i>
+          {`${this.props.message.comments} ${replies}`}
+        </div>
+      );
+    }
+
     return (
       <li style={styles.listItem}>
-        <div style={styles.likes}>{this.props.message.numberOfLikes}</div>
+        <div className="likes">{this.props.message.numberOfLikes}</div>
         <p style={styles.message}>{this.props.message.message}</p>
+        {thumbnail}
         <div style={styles.timestamp}>
-          <i className="fa fa-clock-o" style={{marginRight: '5px'}}></i>
+          <i className="fa fa-clock-o" style={styles.icon}></i>
           <MomentFromNow time={this.props.message.time} />
         </div>
+        {comments}
         <div className="separator"></div>
       </li>
     );

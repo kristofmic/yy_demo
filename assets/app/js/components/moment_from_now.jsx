@@ -1,6 +1,3 @@
-const
-  MINUTE = 1000 * 60;
-
 var
   React = require('react'),
   moment = require('moment'),
@@ -11,36 +8,14 @@ MomentFromNow = React.createClass({
     time: React.PropTypes.string.isRequired
   },
 
-  getInitialState: function () {
-    return {
-      fromNow: this.getMoment()
-    };
-  },
-
-  componentDidMount: function () {
-    this.momentInterval = setInterval(() => {
-      this.setState({
-        fromNow: this.getMoment()
-      })
-    }, MINUTE)
-  },
-
-  componentWillUnmount: function () {
-    clearInterval(this.momentInterval);
-  },
-
-  shouldComponentUpdate: function (nextProps, nextState) {
-    return this.state.fromNow !== nextState.fromNow;
-  },
-
-  getMoment: function() {
-    return moment(this.props.time).fromNow();
+  getMoment: function(time) {
+    return moment(time).fromNow();
   },
 
   render: function() {
     return (
       <span>
-        {this.state.fromNow}
+        {this.getMoment(this.props.time)}
       </span>
     );
   }

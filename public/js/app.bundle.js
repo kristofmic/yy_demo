@@ -192,7 +192,7 @@ Feed = React.createClass({ displayName: "Feed",
 
     if (messages.length) {
       messageItems = messages.map(function (message) {
-        return React.createElement(FeedItem, { key: message.messageId, message: message });
+        return React.createElement(FeedItem, { key: message.messageID, message: message });
       });
 
       if (newMessagesCount) {
@@ -231,22 +231,27 @@ styles = {
     margin: 0,
     fontSize: "18px"
   },
-  likes: {
-    float: "right",
-    fontSize: "28px",
-    fontWeight: "bold",
-    color: "#fff",
-    backgroundColor: "#57e2ca",
-    padding: "2px 12px",
-    marginTop: "-5px",
-    marginLeft: "5px",
-    borderRadius: "4px"
-  },
   timestamp: {
     color: "rgba(99, 115, 112, .6)",
     position: "absolute",
     bottom: "5px",
     left: "28px"
+  },
+  replies: {
+    position: "absolute",
+    bottom: "5px",
+    right: "30px",
+    color: "rgba(99, 115, 112, .6)",
+    fontWeight: "600"
+  },
+  thumbnail: {
+    height: "300px",
+    border: "4px solid #fff",
+    boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
+    margin: "10px 0"
+  },
+  icon: {
+    marginRight: "5px"
   }
 };
 
@@ -262,7 +267,21 @@ FeedItem = React.createClass({ displayName: "FeedItem",
   },
 
   render: function render() {
-    return React.createElement("li", { style: styles.listItem }, React.createElement("div", { style: styles.likes }, this.props.message.numberOfLikes), React.createElement("p", { style: styles.message }, this.props.message.message), React.createElement("div", { style: styles.timestamp }, React.createElement("i", { className: "fa fa-clock-o", style: { marginRight: "5px" } }), React.createElement(MomentFromNow, { time: this.props.message.time })), React.createElement("div", { className: "separator" }));
+    var replies = "replies",
+        thumbnail,
+        comments;
+
+    if (this.props.message.thumbNailUrl) {
+      thumbnail = React.createElement("img", { style: styles.thumbnail, src: this.props.message.thumbNailUrl });
+    }
+
+    if (this.props.message.comments) {
+      if (this.props.message.comments === 1) replies = "reply";
+
+      comments = React.createElement("div", { style: styles.replies }, React.createElement("i", { className: "fa fa-comments", style: styles.icon }), "" + this.props.message.comments + " " + replies);
+    }
+
+    return React.createElement("li", { style: styles.listItem }, React.createElement("div", { className: "likes" }, this.props.message.numberOfLikes), React.createElement("p", { style: styles.message }, this.props.message.message), thumbnail, React.createElement("div", { style: styles.timestamp }, React.createElement("i", { className: "fa fa-clock-o", style: styles.icon }), React.createElement(MomentFromNow, { time: this.props.message.time })), comments, React.createElement("div", { className: "separator" }));
   }
 });
 
@@ -310,8 +329,6 @@ module.exports = {
 },{"./container":3,"./feed":4,"./feed_item":5,"./header":6,"./moment_from_now":8,"./new_feed_items":9}],8:[function(require,module,exports){
 "use strict";
 
-var MINUTE = 1000 * 60;
-
 var React = require("react"),
     moment = require("moment"),
     MomentFromNow;
@@ -321,36 +338,12 @@ MomentFromNow = React.createClass({ displayName: "MomentFromNow",
     time: React.PropTypes.string.isRequired
   },
 
-  getInitialState: function getInitialState() {
-    return {
-      fromNow: this.getMoment()
-    };
-  },
-
-  componentDidMount: function componentDidMount() {
-    var _this = this;
-
-    this.momentInterval = setInterval(function () {
-      _this.setState({
-        fromNow: _this.getMoment()
-      });
-    }, MINUTE);
-  },
-
-  componentWillUnmount: function componentWillUnmount() {
-    clearInterval(this.momentInterval);
-  },
-
-  shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
-    return this.state.fromNow !== nextState.fromNow;
-  },
-
-  getMoment: function getMoment() {
-    return moment(this.props.time).fromNow();
+  getMoment: function getMoment(time) {
+    return moment(time).fromNow();
   },
 
   render: function render() {
-    return React.createElement("span", null, this.state.fromNow);
+    return React.createElement("span", null, this.getMoment(this.props.time));
   }
 });
 
@@ -576,13 +569,12 @@ actionHandlers = (function () {
         });
 
         if (index > 0) {
-          state.newMessages = data.messages.slice(0, index);
-          this.emitChange();
+          state.newMessages = data.messages.splice(0, index);
         }
-      } else {
-        state.messages = data.messages;
-        this.emitChange();
       }
+
+      state.messages = data.messages;
+      this.emitChange();
     }
   });
 
