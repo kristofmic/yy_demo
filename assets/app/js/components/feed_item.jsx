@@ -26,7 +26,8 @@ styles = {
     bottom: '5px',
     right: '30px',
     color: 'rgba(99, 115, 112, .6)',
-    fontWeight: '600'
+    fontWeight: '600',
+    padding: 0
   },
   thumbnail: {
     height: '300px',
@@ -50,6 +51,10 @@ FeedItem = React.createClass({
     };
   },
 
+  fetchComments: function (yakId) {
+
+  },
+
   render: function() {
     var
       message = this.props.message,
@@ -65,10 +70,10 @@ FeedItem = React.createClass({
       if (message.comments === 1) repliesText = 'reply';
 
       commentsEl = (
-        <div style={styles.replies}>
+        <button className="btn btn-link" style={styles.replies} onClick={this.fetchComments.bind(this, yakId)}>
           <i className="fa fa-comments" style={styles.icon}></i>
           {`${message.comments} ${repliesText}`}
-        </div>
+        </button>
       );
     }
 

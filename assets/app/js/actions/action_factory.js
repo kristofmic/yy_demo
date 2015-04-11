@@ -1,12 +1,20 @@
 var
   dispatcher = require('../dispatcher'),
-  { FETCH_YAKS, FETCH_YAKS_ERROR, LOAD_NEW_YAKS } = require('../constants'),
+  {
+    FETCH_YAKS,
+    FETCH_YAKS_ERROR,
+    LOAD_NEW_YAKS,
+    FETCH_YAK_COMMENTS,
+    FETCH_YAK_COMMENTS_ERROR,
+    INIT_FETCH_YAK_COMMENTS
+  } = require('../constants'),
   yaksApi = require('../utils/api/yaks_api'),
   actionFactoryTemplate;
 
 actionFactoryTemplate = {
   fetchYaks,
-  loadNewYaks
+  loadNewYaks,
+  fetchComments
 };
 
 module.exports = actionFactoryTemplate;
@@ -23,6 +31,18 @@ function fetchYaks(coords) {
 
 function loadNewYaks() {
   dispatchViewAction(LOAD_NEW_YAKS);
+}
+
+function fetchComments(yakId) {
+  dispatchViewAction(INIT_FETCH_YAK_COMMENTS, { yakId: yakId });
+
+  yaksApi.fetchComments(yakId)
+    .then((data) => {
+      dispatchServerAction(FETCH_YAK_COMMENTS, data);
+    })
+    ['catch']((err) => {
+      dispatchServerAction(FETCH_YAK_COMMENTS_ERROR, err);
+    });
 }
 
 function dispatchServerAction(type, data) {

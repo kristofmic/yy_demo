@@ -7,7 +7,7 @@ var
   findIndex = require('lodash/array/findIndex'),
   actionHandlers,
   state,
-  storeTemplate;
+  yaksStore;
 
 state = {
   messages: [],
@@ -43,10 +43,10 @@ actionHandlers = {
   }
 };
 
-storeTemplate = new Store(CHANGE_EVENT, actionHandlers);
-storeTemplate.getState = getState;
+yaksStore = new Store(CHANGE_EVENT, actionHandlers);
+yaksStore.getState = getState;
 
-module.exports = storeTemplate;
+module.exports = yaksStore;
 
 function getState () {
   return state;

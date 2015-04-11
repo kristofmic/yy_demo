@@ -4,10 +4,12 @@ var
 
 routes = {
   fetch: '/api/yaks',
+  fetchComments: '/api/yaks/:yakId/comments'
 };
 
 module.exports = {
-  fetch
+  fetch,
+  fetchComments
 };
 
 function fetch(config) {
@@ -28,7 +30,24 @@ function fetch(config) {
   };
 
   return ajax(req)
-    .then((res) => {
-      if (res.status === 200) return res.data;
-    });
+    .then(resolveData);
+}
+
+function fetchComments(id) {
+  var
+    req;
+
+  req = {
+    url: routes.fetchComments.replace(':yakId', id),
+    method: 'get',
+    responseType: 'json'
+  };
+
+  return ajax(req)
+    .then(resolveData);
+}
+
+function resolveData(res) {
+  res = res || {};
+  return res.data;
 }
