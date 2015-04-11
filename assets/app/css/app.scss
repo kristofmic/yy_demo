@@ -2,3 +2,8 @@
 @import './partials/_typography';
 @import './partials/_body';
 @import './partials/_separator';
+
+.fa-spin {
+  -webkit-animation-duration: 1.25s;
+  animation-duration: 1.25s;
+}

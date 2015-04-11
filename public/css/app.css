@@ -85,4 +85,9 @@ html body {
   bottom: 0;
 }
 
+.fa-spin {
+  -webkit-animation-duration: 1.25s;
+  animation-duration: 1.25s;
+}
+
 /*# sourceMappingURL=app.css.map */
