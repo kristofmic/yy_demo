@@ -122,8 +122,7 @@ Feed = React.createClass({ displayName: "Feed",
     var yaksStoreState = yaksStore.getState();
 
     return {
-      messages: yaksStoreState.messages,
-      newMessages: yaksStoreState.newMessages
+      messages: yaksStoreState.messages
     };
   },
 
@@ -164,29 +163,23 @@ Feed = React.createClass({ displayName: "Feed",
     var yaksStoreState = yaksStore.getState();
 
     this.setState({
-      messages: yaksStoreState.messages,
-      newMessages: yaksStoreState.newMessages
+      messages: yaksStoreState.messages
     });
   },
 
   render: function render() {
     var messages = this.state.messages,
-        newMessagesCount = this.state.newMessages.length,
         messageItems;
 
     if (messages.length) {
       messageItems = messages.map(function (message) {
         return React.createElement(FeedItem, { key: message.messageID, message: message });
       });
-
-      if (newMessagesCount) {
-        messageItems.unshift(React.createElement(NewFeedItems, { newMessagesCount: newMessagesCount }));
-      }
     } else {
       messageItems = React.createElement("li", { style: { position: "relative" } }, React.createElement("p", { style: styles.loading }, React.createElement("img", { src: "img/yak.png", style: styles.loadingImg, className: "fa-spin" }), "Loading Yaks..."));
     }
 
-    return React.createElement("div", { className: "row" }, React.createElement("div", { className: "col-xs-12" }, React.createElement("ul", { className: "list-unstyled yaks" }, messageItems)));
+    return React.createElement("div", { className: "row" }, React.createElement("div", { className: "col-xs-12" }, React.createElement(NewFeedItems, null), React.createElement("ul", { className: "list-unstyled yaks" }, messageItems)));
   }
 });
 
@@ -331,15 +324,19 @@ var React = require("react");
 var _require = require("../actions/action_factory");
 
 var loadNewYaks = _require.loadNewYaks;
+var yaksStore = require("../stores/yaks_store");
 var styles;
 var NewFeedItems;
 
 styles = {
-  listItem: {
-    padding: "15px 30px",
-    backgroundColor: "#57e2ca",
-    borderTop: "2px solid #f4f6f5",
-    borderBottom: "2px solid #f4f6f5"
+  flash: {
+    backgroundColor: "#ac95c7",
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    boxShadow: "0 2px 5px rgba(0, 0, 0, .2)",
+    zIndex: 1000
   },
   message: {
     margin: 0,
@@ -349,34 +346,59 @@ styles = {
 };
 
 NewFeedItems = React.createClass({ displayName: "NewFeedItems",
-  propTypes: {
-    newMessagesCount: React.PropTypes.number.isRequired
+  getInitialState: function getInitialState() {
+    var yaksStoreState = yaksStore.getState();
+
+    return {
+      newMessagesCount: yaksStoreState.newMessages.length
+    };
   },
 
-  getDefaultProps: function getDefaultProps() {
-    return {
-      newMessagesCount: 0
-    };
+  componentDidMount: function componentDidMount() {
+    yaksStore.addChangeListener(this.handleStoreChange);
+  },
+
+  componentWillUnmount: function componentWillUnmount() {
+    yaksStore.removeChangeListener(this.handleStoreChange);
+  },
+
+  shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
+    return this.state.newMessagesCount !== nextState.newMessagesCount;
+  },
+
+  handleStoreChange: function handleStoreChange() {
+    var yaksStoreState = yaksStore.getState();
+
+    this.setState({
+      newMessagesCount: yaksStoreState.newMessages.length
+    });
   },
 
   loadNewMessages: function loadNewMessages() {
     loadNewYaks();
+    window.scrollTo(0, 0);
   },
 
   render: function render() {
-    var message = "" + this.props.newMessagesCount + " new message";
+    var count = this.state.newMessagesCount,
+        flashEl,
+        message;
 
-    if (this.props.newMessagesCount !== 1) {
-      message += "s";
+    if (count > 0) {
+      message = "" + count + " new message";
+
+      if (count > 1) message += "s";
+
+      flashEl = React.createElement("div", { style: styles.flash }, React.createElement("p", { className: "btn btn-link", style: styles.message, onClick: this.loadNewMessages }, message));
     }
 
-    return React.createElement("li", { style: styles.listItem }, React.createElement("p", { className: "btn btn-link", style: styles.message, onClick: this.loadNewMessages }, message));
+    return React.createElement("div", null, flashEl);
   }
 });
 
 module.exports = NewFeedItems;
 
-},{"../actions/action_factory":1,"react":261}],10:[function(require,module,exports){
+},{"../actions/action_factory":1,"../stores/yaks_store":14,"react":261}],10:[function(require,module,exports){
 "use strict";
 
 var mirror = require("react/lib/keyMirror");
