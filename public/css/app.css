@@ -36,7 +36,7 @@ h4, h5, h6 {
 }
 
 .text-muted {
-  color: rgba(0, 0, 0, 0.54) !important;
+  color: rgba(99, 115, 112, 0.6) !important;
 }
 
 .text-shadow {
@@ -89,6 +89,20 @@ html body {
   left: 15px;
   right: 15px;
   bottom: 0;
+}
+
+.list-item {
+  background-color: #FFF;
+  padding: 15px 30px 30px 30px;
+  position: relative;
+  min-height: 100px;
+}
+.list-item .message {
+  margin: 0;
+  font-size: 18px;
+}
+.list-item i {
+  margin-right: 5px;
 }
 
 .likes {

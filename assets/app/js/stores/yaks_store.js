@@ -5,6 +5,7 @@ var
   Store = require('./store'),
   { FETCH_YAKS, LOAD_NEW_YAKS } = require('../constants'),
   findIndex = require('lodash/array/findIndex'),
+  find = require('lodash/collection/find'),
   actionHandlers,
   state,
   yaksStore;
@@ -45,9 +46,14 @@ actionHandlers = {
 
 yaksStore = new Store(CHANGE_EVENT, actionHandlers);
 yaksStore.getState = getState;
+yaksStore.getMessage = getMessage;
 
 module.exports = yaksStore;
 
 function getState () {
   return state;
+}
+
+function getMessage (messageID) {
+  return find(state.messages, { messageID });
 }

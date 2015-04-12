@@ -27,7 +27,7 @@ function fetchYaks(req, res) {
 
 function fetchComments(req, res) {
   var
-    id = req.params.yakId,
+    id = decodeURIComponent(req.params.yakId),
     lat = req.query.lat || YY_HQ_LAT,
     long = req.query.long || YY_HQ_LONG,
     url = util.format(YY_FETCH_COMMENTS_API, id, lat, long);
@@ -56,7 +56,6 @@ function get(url) {
       var
         body = '';
 
-      console.log(httpsRes);
       if (httpsRes.statusCode !== 200) {
         return reject(new Error('Server responded with ' + httpsRes.statusCode + ' error.'));
       }

@@ -3,14 +3,13 @@ const
 
 var
   Store = require('./store'),
-  { INIT_FETCH_YAK_COMMENTS, FETCH_YAK_COMMENTS } = require('../constants'),
+  { FETCH_YAK_COMMENTS } = require('../constants'),
   actionHandlers,
   state,
   commentsStore;
 
 state = {
-  comments: {},
-  fetching: {}
+  comments: {}
 };
 
 actionHandlers = {
@@ -18,17 +17,7 @@ actionHandlers = {
     var
       yakId = data.messageID;
 
-    state.fetching[yakId] = false;
     state.comments[yakId] = data.comments;
-
-    this.emitChange();
-  },
-
-  [INIT_FETCH_YAK_COMMENTS]: function (data) {
-    var
-      yakId = data.yakId;
-
-    state.fetching[yakId] = true;
 
     this.emitChange();
   }
