@@ -44,10 +44,10 @@ function fetchComments(req, res) {
 
 function parseYakId (req, res, next) {
   var
-    suffix = req.params.suffix,
+    prefix = req.params.prefix,
     id = req.params.id;
 
-  req.params.yakId = suffix + '/' + id;
+  req.params.yakId = prefix + '/' + id;
   next();
 }
 
