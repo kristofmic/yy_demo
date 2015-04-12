@@ -1,13 +1,16 @@
 var
+  YY_FETCH_API = 'https://us-central-api.yikyakapi.net/api/getMessages?userID=-&lat=%s&long=%s&userLat=%s&userLong=%s&version=2.5.1&horizontalAccuracy=65.000000&verticalAccuracy=10.000000&altitude=0&floorLevel=0&speed=0&course=0',
+  YY_FETCH_COMMENTS_API = 'https://us-central-api.yikyakapi.net/api/getComments?userID=-&messageID=%s&userLat=%s&userLong=%s&version=2.5.1&horizontalAccuracy=65.000000&verticalAccuracy=10.000000&altitude=0&floorLevel=0&speed=0&course=0',
+  YY_HQ_LAT = '33.849120',
+  YY_HQ_LONG = '-84.373375',
   express = require('express'),
   router = express.Router(),
   https = require('https'),
-  util = require('util'),
-  YY_API = 'https://us-central-api.yikyakapi.net/api/getMessages?userID=-&lat=%s&long=%s&userLat=%s&userLong=%s&version=2.4.1&horizontalAccuracy=65.000000&verticalAccuracy=10.000000&altitude=0&floorLevel=0&speed=0&course=0',
-  YY_HQ_LAT = '33.849120',
-  YY_HQ_LONG = '-84.373375';
+  Bluebird = require('bluebird'),
+  util = require('util');
 
 router.get('/yaks', fetchYaks);
+router.get('/yaks/:yakId/comments', fetchComments);
 
 module.exports = router;
 
@@ -15,32 +18,68 @@ function fetchYaks(req, res) {
   var
     lat = req.query.lat || YY_HQ_LAT,
     long = req.query.long || YY_HQ_LONG,
-    url = util.format(YY_API, lat, long, lat, long);
+    url = util.format(YY_FETCH_API, lat, long, lat, long);
 
-  https
-    .get(url, handleResponse)
-    .on('error', handleError(res));
+  get(url)
+    .then(handleSuccess(res))
+    .catch(handleError(res));
+}
 
-  function handleResponse(httpsRes) {
-    var
-      body = '';
+function fetchComments(req, res) {
+  var
+    id = decodeURIComponent(req.params.yakId),
+    lat = req.query.lat || YY_HQ_LAT,
+    long = req.query.long || YY_HQ_LONG,
+    url = util.format(YY_FETCH_COMMENTS_API, id, lat, long);
 
-    if (httpsRes.statusCode !== 200) {
-      return handleError(res)(new Error('Error fetching Yaks.'));
-    }
-    httpsRes.setEncoding('utf8');
+  get(url)
+    .then(function(data) {
+      data.messageID = id;
+      return data;
+    })
+    .then(handleSuccess(res))
+    .catch(handleError(res));
+}
 
-    httpsRes.on('data', function(chunk) {
-      body += chunk;
-    });
+function get(url) {
+  var
+    deferredPromise = new Bluebird(defer);
 
-    httpsRes.on('end', function() {
+  return deferredPromise;
+
+  function defer(resolve, reject) {
+    https
+      .get(url, handleResponse)
+      .on('error', reject);
+
+    function handleResponse(httpsRes) {
       var
-        json = JSON.parse(body);
+        body = '';
 
-      handleSuccess(res)(json);
-    });
+      if (httpsRes.statusCode !== 200) {
+        return reject(new Error('Server responded with ' + httpsRes.statusCode + ' error.'));
+      }
+
+      httpsRes.setEncoding('utf8');
+
+      httpsRes.on('data', function(chunk) {
+        body += chunk;
+      });
+
+      httpsRes.on('end', function() {
+        resolve(tryParse(body));
+      });
+    }
   }
+}
+
+function tryParse(jsonString) {
+  try {
+    jsonString = JSON.parse(jsonString);
+  }
+  catch(e) {}
+
+  return jsonString;
 }
 
 function handleSuccess(res) {

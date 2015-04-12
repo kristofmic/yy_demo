@@ -4,22 +4,11 @@ var
   { fetchYaks } = require('../actions/action_factory'),
   FeedItem = require('./feed_item'),
   NewFeedItems = require('./new_feed_items'),
+  Loading = require('./loading'),
   styles,
   Feed;
 
-styles = {
-  loading: {
-    fontSize: '18px',
-    padding: '15px 25px',
-    backgroundColor: '#fff',
-    margin: 0
-  },
-  loadingImg: {
-    height: '28px',
-    verticalAlign:'middle',
-    marginRight: 10
-  }
-};
+styles = {};
 
 Feed = React.createClass({
   propTypes: { },
@@ -91,12 +80,7 @@ Feed = React.createClass({
     }
     else {
       messageItems = (
-        <li style={{position: 'relative'}}>
-          <p style={styles.loading}>
-            <img src="img/yak.png" style={styles.loadingImg} className="fa-spin"/>
-            Loading Yaks...
-          </p>
-        </li>
+        <Loading message="Loading Yaks..."   />
       );
     }
 

@@ -5,14 +5,15 @@ var
   routes = require('./routes'),
   { Header } = require('./components');
 
-Router.run(routes, HistoryLocation, (Handler) => {
+Router.run(routes, HistoryLocation, (Handler, state) => {
   var
+    params = state.params,
     app;
 
   app = (
     <div>
       <Header />
-      <Handler />
+      <Handler params={params} />
     </div>
   );
 

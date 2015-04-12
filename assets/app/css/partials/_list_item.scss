@@ -1,0 +1,15 @@
+.list-item {
+  background-color: $white;
+  padding: 15px 30px 30px 30px;
+  position: relative;
+  min-height: 100px;
+
+  .message {
+    margin: 0;
+    font-size: 18px;
+  }
+
+  i {
+    margin-right: 5px
+  }
+};

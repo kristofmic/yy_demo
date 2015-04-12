@@ -1,35 +1,17 @@
 var
   React = require('react'),
   MomentFromNow = require('./moment_from_now'),
+  { Link } = require('react-router'),
   styles,
   FeedItem;
 
 styles = {
-  listItem: {
-    backgroundColor: '#FFF',
-    padding: '15px 30px 30px 30px',
-    position: 'relative',
-    minHeight: '100px'
-  },
-  message: {
-    margin: 0,
-    fontSize: '18px'
-  },
-  timestamp: {
-    color: 'rgba(99, 115, 112, .6)',
-    position: 'absolute',
-    bottom: '5px',
-    left: '28px'
-  },
   replies: {
     position: 'absolute',
     bottom: '5px',
     right: '30px',
-    color: 'rgba(99, 115, 112, .6)',
-    fontWeight: '600'
-  },
-  icon: {
-    marginRight: '5px'
+    fontWeight: '600',
+    padding: 0
   }
 };
 
@@ -59,22 +41,21 @@ FeedItem = React.createClass({
       if (message.comments === 1) repliesText = 'reply';
 
       commentsEl = (
-        <div style={styles.replies}>
-          <i className="fa fa-comments" style={styles.icon}></i>
+        <Link className="btn btn-link text-muted" style={styles.replies} to="comments" params={{yakId: encodeURIComponent(message.messageID)}}>
+          <i className="fa fa-comments"></i>
           {`${message.comments} ${repliesText}`}
-        </div>
+        </Link>
       );
     }
 
     return (
-      <li style={styles.listItem}>
+      <li className="list-item">
         <div className="likes">{message.numberOfLikes}</div>
-        <p style={styles.message}>{message.message}</p>
+        <p className="message">{message.message}</p>
         {thumbnailEl}
-        <div style={styles.timestamp}>
-          <i className="fa fa-clock-o" style={styles.icon}></i>
+        <span className="text-muted">
           <MomentFromNow time={message.time} />
-        </div>
+        </span>
         {commentsEl}
         <div className="separator"></div>
       </li>
