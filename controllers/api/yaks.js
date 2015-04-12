@@ -11,6 +11,7 @@ var
 
 router.get('/yaks', fetchYaks);
 router.get('/yaks/:yakId/comments', fetchComments);
+router.get('/yaks/:prefix/:id/comments', parseYakId, fetchComments);
 
 module.exports = router;
 
@@ -39,6 +40,15 @@ function fetchComments(req, res) {
     })
     .then(handleSuccess(res))
     .catch(handleError(res));
+}
+
+function parseYakId (req, res, next) {
+  var
+    suffix = req.params.suffix,
+    id = req.params.id;
+
+  req.params.yakId = suffix + '/' + id;
+  next();
 }
 
 function get(url) {
