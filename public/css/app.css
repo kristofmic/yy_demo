@@ -70,6 +70,12 @@ i, .fa {
 .social-icon .fa-instagram:hover {
   color: #675144;
 }
+@media (max-width: 768px) {
+  .social-icon {
+    font-size: 18px;
+    margin: 0 9px;
+  }
+}
 
 html body {
   background-color: #f4f6f5;
@@ -92,6 +98,7 @@ html body {
   color: #FFF;
   background-color: #57e2ca;
   padding: 2px 12px;
+  margin-top: -4px;
   margin-left: 10px;
   border-radius: 4px;
 }
@@ -102,9 +109,42 @@ html body {
   }
 }
 
+.thumbnail {
+  max-height: 300px;
+  max-width: 100%;
+  border: 4px solid #FFF;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  margin: 10px 0;
+  border-radius: 1px;
+}
+@media (max-width: 768px) {
+  .thumbnail {
+    margin: 10px auto;
+  }
+}
+
 .fa-spin {
   -webkit-animation-duration: 1.25s;
   animation-duration: 1.25s;
+}
+
+.logo {
+  height: 48px;
+}
+
+@media (max-width: 768px) {
+  .logo {
+    height: 32px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  .yaks {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
 }
 
 /*# sourceMappingURL=app.css.map */

@@ -29,8 +29,7 @@ Feed = React.createClass({
       yaksStoreState = yaksStore.getState();
 
     return {
-      messages: yaksStoreState.messages,
-      newMessages: yaksStoreState.newMessages
+      messages: yaksStoreState.messages
     };
   },
 
@@ -74,15 +73,13 @@ Feed = React.createClass({
       yaksStoreState = yaksStore.getState();
 
     this.setState({
-      messages: yaksStoreState.messages,
-      newMessages: yaksStoreState.newMessages
+      messages: yaksStoreState.messages
     });
   },
 
   render: function() {
     var
       messages = this.state.messages,
-      newMessagesCount = this.state.newMessages.length,
       messageItems;
 
     if (messages.length) {
@@ -91,12 +88,6 @@ Feed = React.createClass({
           <FeedItem key={message.messageID} message={message} />
         );
       });
-
-      if (newMessagesCount) {
-        messageItems.unshift((
-          <NewFeedItems newMessagesCount={newMessagesCount} />
-        ));
-      }
     }
     else {
       messageItems = (
@@ -112,7 +103,8 @@ Feed = React.createClass({
     return (
       <div className="row">
         <div className="col-xs-12">
-          <ul className="list-unstyled">
+          <NewFeedItems />
+          <ul className="list-unstyled yaks">
             {messageItems}
           </ul>
         </div>

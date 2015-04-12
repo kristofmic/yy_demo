@@ -29,12 +29,6 @@ styles = {
     fontWeight: '600',
     padding: 0
   },
-  thumbnail: {
-    height: '300px',
-    border: '4px solid #fff',
-    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)',
-    margin: '10px 0'
-  },
   icon: {
     marginRight: '5px'
   }
@@ -63,7 +57,7 @@ FeedItem = React.createClass({
       commentsEl;
 
     if (message.thumbNailUrl) {
-      thumbnailEl = (<img style={styles.thumbnail} src={message.thumbNailUrl} />);
+      thumbnailEl = (<img className="thumbnail" src={message.thumbNailUrl} />);
     }
 
     if (message.comments) {

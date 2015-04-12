@@ -3,8 +3,28 @@
 @import './partials/_body';
 @import './partials/_separator';
 @import './partials/_likes';
+@import './partials/_thumbnail';
 
 .fa-spin {
   -webkit-animation-duration: 1.25s;
   animation-duration: 1.25s;
+}
+
+.logo {
+  height: 48px;
+}
+
+@media (max-width: 768px) {
+  .logo {
+    height: 32px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  .yaks {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
 }
